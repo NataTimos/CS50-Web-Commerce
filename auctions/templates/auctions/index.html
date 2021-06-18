@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <ul class="listing-items">
+        {% for product in products %}
+            <li class="listing-item">
+                <h3 class="listing-item_title">
+                    <a href="{% url 'product' product.id %}">{{product.title}}</a>
+                </h3>
+                <div class="listing-items_img">
+                    <img src="{{ product.image_link }}" alt="{{product.title}}">
+                </div>
+                
+                <p>
+                    {{ product.description}}
+                </p>
+                <div class="price">
+                    <p class="start-price">
+                    START Price: {{product.price_start}}
+                    </p>
+                    <p class="final-price">
+                    CURRENT Price: {{ product.current_price }}
+                    </p>
+                </div>
+                
+            </li>
+        {% empty %}
+            <li>
+                No products.
+            </li>
+        {% endfor%}
+    </ul>    
+{% endblock %}

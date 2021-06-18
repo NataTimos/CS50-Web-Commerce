@@ -1,0 +1,48 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>New Listing</h2>
+
+    <form action="{% url 'newProduct' %}" method="post">
+        {% csrf_token %}        
+        <div>
+            <p>
+                Product title (required), max 100 characters:
+            </p>
+
+            {{ CreateProductForm.productTitle }}
+        </div>
+        <div>
+            <p>
+                Product description:
+            </p>
+            {{ CreateProductForm.productDesc }}
+        </div>
+        <div>
+            <p>
+                Product start price:
+            </p>
+            
+            {{ CreateProductForm.productPrice }}
+        </div>
+
+        <div>
+            link: {{ CreateProductForm.productLink }}
+        </div>
+
+        <div>
+            Select category:
+            <select name="category">
+                {% for c in categories %}
+                    <option value="{{c.id}}">
+                        {{ c.category }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>        
+
+        <input type="submit" value="Save new listing">
+    </form>
+    
+{% endblock %}

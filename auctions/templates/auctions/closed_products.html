@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Closed Listings</h2>
+
+    <ul class="listing-items">
+        {% for product in products %}
+            <li class="listing-item">
+                <h3 class="listing-item_title">
+                    <a href="{% url 'closed_item' product.id %}">{{product.title}}</a>
+                </h3>
+                <div class="listing-items_img">
+                    <img src="{{ product.image_link }}" alt="{{product.title}}">
+                </div>
+                
+                <p>
+                    {{ product.description}}
+                </p>
+                <div class="price">
+                    <p >
+                    Finish Price: {{ product.current_price }}
+                </p>
+                </div>
+                
+            </li>
+        {% empty %}
+            <li>
+                No products.
+            </li>
+        {% endfor%}
+    </ul>    
+{% endblock %}

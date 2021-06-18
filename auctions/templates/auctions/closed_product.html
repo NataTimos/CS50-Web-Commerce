@@ -1,0 +1,72 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <h3 class="listing-item_title">
+        Auction lot "{{title}}" - CLOSED
+    </h3>
+
+    {% if request.user == winner %}
+    <p class="winner">
+        {{ winner }} - you won this auction lot!
+    </p>
+    {% endif %}
+
+    <div class="listing-items_img listing-items_img-big">
+        <img src="{{ img }}" >
+    </div>
+
+    <!-- an authenticated user can remove a closed listing from his/her watchlist -->
+    {% if user.is_authenticated %}
+        {% if in_watchlist  %}
+            <a class="" href="{% url 'watchlist_remove' id %}">Remove from watchlist</a>
+        {% endif %}
+    {% endif %}
+
+    <p>
+        {{ description}}
+    </p>
+    
+    <div>
+        Category: {{ category }}
+    </div>
+    <p>
+        Seller Name: {{seller}}
+    </p>
+    <p class="product-price-item">
+        Final price: {{ final_price }}
+    </p>
+    
+    <ul class="comments">
+        {% for comment in comments %}
+           <li>
+              Name: {{comment.user}}
+              Date: {{comment.date}}
+              Content:{{comment.content}}
+           </li>
+        {% empty %}
+              <li>
+                  No comments yet.
+              </li>
+        {%endfor%}
+     </ul>
+
+    <div>
+        <form class="comment-form" action="{% url 'comment' id %}" method="POST">
+         {% csrf_token %} 
+         
+           <textarea  name="comment" placeholder="Comment" required></textarea>
+           <br>
+           <input type="submit" value="ADD COMMENT">
+               
+        </form>
+        
+     </div>
+    </div>
+
+   
+   
+{% endblock %}
+</div>
+    

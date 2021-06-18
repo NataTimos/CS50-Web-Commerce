@@ -1,0 +1,126 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+        <h3 class="listing-item_title listing-item_title-product">
+      {{title}}
+    </h3>
+    <div class="listing-items_img listing-items_img-big">
+        <img src="{{ img }}" >
+    </div>
+    
+
+    {% if user.is_authenticated %}
+        <div class="button-box">
+            {% if in_watchlist  %}
+                <div class="button">
+                    <a class="" href="{% url 'watchlist_remove' id %}">Remove from watchlist</a>
+                </div>            
+            {% else %}
+                <div class="button">
+                    <a class="" href="{% url 'watchlist_add' id %}">Add to watchlist</a>
+                </div>            
+            {% endif %}
+   
+            {% if user_close %}
+                <div class="button">
+                    <a class="" href="{% url 'closed_item' id %}">Close auction</a>
+                </div>            
+            {% endif %}
+        </div>
+        <p>
+            Seller Name: {{seller}}
+        </p>
+        <p>
+            Date: {{date}}
+        </p>
+        <div>
+            Category: {{ category }}
+        </div>
+    {% endif %}
+    
+    <p>
+        Description: 
+        {{ description}}
+    </p>
+    
+    <div class="product-price">
+        <p class="product-price-item">
+            START Price: {{ price_start }}
+        </p>
+        <p class="product-price-item">
+            CURRENT Price: {{ current_price }}
+        </p>
+    </div>
+    
+
+    {% if user.is_authenticated %}
+        
+        <div class="message">
+            {% if message1 %}
+                Your bid: {{ bid1 }}
+                
+                "Bid coudnt be less then 0.01"
+                <br>
+            {%endif%}
+            {% if message2 %}
+                Your bid: {{ bid1 }}
+                
+                "Bid must be higher than the current price"
+            {%endif%}
+        </div>
+        <div>
+            <form class="bid-form" action="{% url 'new_bid' id %}" method="POST">
+            {% csrf_token %} 
+                <p class="">
+                    <!-- Bid:  -->
+                    <input type="number" step='0.01' name="bid" placeholder="Higher bid"  >
+                    <input class="" type="submit" value="ADD BID">
+                </p>   
+               
+            </form>
+               
+        </div>
+        <ul>
+            {% for bid in bids %}
+            <li>
+               User {{bid.user}} made bid {{bid.new_price}} at {{bid.date}}
+            </li>
+            {% empty %}
+               <li>
+                    No bids.
+               </li>
+            {%endfor%}
+        </ul>
+        <ul class="comments">
+                {% for comment in comments %}
+                   <li>
+                      {{comment.user}} wrote comment:{{comment.content}}
+                      <br>
+                      {{comment.date}}
+                   </li>
+                {% empty %}
+                      <li>
+                          No comments.
+                      </li>
+                {%endfor%}
+        </ul>
+
+
+        <form class="comment-form" action="{% url 'comment' id %}" method="POST">
+          {% csrf_token %} 
+          
+            Leave a comment: 
+            <br>
+            <textarea  name="comment" placeholder="Comment" required></textarea>
+            <br>
+            <input type="submit" value="ADD COMMENT">
+            
+         
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}
+

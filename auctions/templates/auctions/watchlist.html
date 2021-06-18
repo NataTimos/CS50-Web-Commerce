@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}{{ user }}'s watchlist{% endblock %}
+
+{% block body %}
+    <div class="">
+        <h2 class="">{{ user }}'s watchlist</h2>
+    </div>
+    <div class="">
+        <ul class="listing-items">
+                {% for product in watchlist %}
+                <li class="listing-item">
+                    <h3 class="listing-item_title">
+                        <a href="{% url 'product' product.id %}">Title: {{product.title}}</a>
+                    </h3>
+                    <div class="listing-items_img">
+                        <img src="{{ product.image_link }}" alt="{{product.title}}">
+                    </div>
+                    
+                    
+                </li>
+            {% empty %}
+                <li>
+                    No products.
+                </li>
+                {% endfor %}
+            </ul>
+
+    </div>
+{% endblock %}
