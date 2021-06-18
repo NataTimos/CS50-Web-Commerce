@@ -2,12 +2,12 @@
 
 # Nutritions
 
-##  Project #2 Commerce from CS50’s Web Programming with Python and JavaScript hosted on eDX
+##  Project #2 "Commerce" from CS50’s Web Programming with Python and JavaScript hosted on eDX
 
-#### [Commerce CS50 Web project Demo Video](https://youtu.be/Q3za2eeDuXI)
+#### [Project #2 "Commerce" Demo Video](https://youtu.be/Q3za2eeDuXI)
 
 Image is link to the video too :)
-[![Nutritions CS50 final project](https://github.com/NataTimos/Nutritions/blob/main/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-02-10%20%D0%B2%2015.20.51.png)](https://youtu.be/Q3za2eeDuXI)
+[![Project #2 "Commerce" ](https://github.com/NataTimos/CS50-Web-Commerce/blob/main/commerce%201.png)](https://youtu.be/Q3za2eeDuXI)
 
 ### Specification
 These are the specifications given to me in the course CS50’s Web Programming with Python and JavaScript:
